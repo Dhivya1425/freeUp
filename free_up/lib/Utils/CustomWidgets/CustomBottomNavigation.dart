@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:free_up/Utils/CustomWidgets/CustomText.dart';
 import 'package:free_up/Utils/Language/EnglishLanguage.dart';
 
+import '../../Common/CommonLoginBottomSheet/View/CommonLoginBottomSheetView.dart';
+
 class CustomBottomNavigation extends StatefulWidget {
-  double? bottomAppBarHeight;
-   CustomBottomNavigation({Key? key,this.bottomAppBarHeight}) : super(key: key);
+  double bottomAppBarHeight = 100;
+   CustomBottomNavigation({Key? key,required this.bottomAppBarHeight}) : super(key: key);
 
   @override
   State<CustomBottomNavigation> createState() => _CustomBottomNavigationState();
@@ -15,8 +17,9 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
-      elevation: 0,
-      height:100,
+      elevation: 5,
+      height:widget.bottomAppBarHeight,
+      clipBehavior: Clip.hardEdge,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         mainAxisSize: MainAxisSize.max,
@@ -38,7 +41,12 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
       children: [
         IconButton(
           icon: Icon(icon),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const CommonBottomSheetView()),
+            );
+          },
         ),
         CustomText(
           text: text,

@@ -50,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
     ),
     ),
       floatingActionButtonLocation : FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: CustomBottomNavigation(),
+      bottomNavigationBar: CustomBottomNavigation(bottomAppBarHeight: 100,),
     );
   }
 }
