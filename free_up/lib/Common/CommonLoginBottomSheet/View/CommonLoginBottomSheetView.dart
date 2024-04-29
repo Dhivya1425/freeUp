@@ -1,55 +1,71 @@
 import 'package:flutter/material.dart';
 
-class CommonBottomSheetView extends StatefulWidget {
-  const CommonBottomSheetView({Key? key}) : super(key: key);
 
-  @override
-  State<CommonBottomSheetView> createState() => _CommonBottomSheetViewState();
-}
 
-class _CommonBottomSheetViewState extends State<CommonBottomSheetView>  with TickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _animation;
-  @override
-  initState() {
-    _controller = AnimationController(
-      duration: const Duration(seconds: 1),
-      vsync: this,
-    );
-    _animation = CurvedAnimation(
-      parent: _controller,
-      curve: Curves.fastLinearToSlowEaseIn,
-    );
-    super.initState();
+class CommonBottomSheetView extends ModalRoute {
+  late BuildContext context;
+  CommonBottomSheetView(BuildContext context) {
   }
 
   @override
-  void dispose() {
-    super.dispose();
+  Duration get transitionDuration => const Duration(milliseconds: 300);
+
+  @override
+  bool get opaque => false;
+
+  @override
+  bool get barrierDismissible => false;
+
+  @override
+  Color get barrierColor => Colors.black.withOpacity(0.6);
+
+  @override
+  String? get barrierLabel => null;
+
+  @override
+  bool get maintainState => true;
+
+  Future<bool> pop() async {
+    Navigator.pop(context, false);
+    return false;
   }
 
   @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: () {
-        Navigator.pop(context);
-      },
-      child: BottomSheet(
-        onClosing: () {
-          Navigator.pop(context);
-        },
-        builder: (BuildContext context) {
-          return AnimatedContainer(
-            duration: Duration(seconds: 1),
-            child: Container(
-              color: Colors.red,
-              width: double.infinity,
-              height: 200,
-            ),
-          );
-        },
-      ),
-    );
+  Widget buildPage(
+      BuildContext context,
+      Animation<double> animation,
+      Animation<double> secondaryAnimation,
+      ) {
+    return WillPopScope(
+      onWillPop: pop,
+        child: Material(
+            type: MaterialType.transparency,
+            child: SafeArea(
+                child: Stack(children: [
+                  GestureDetector(
+                    onTap: () {
+                      // Navigator.pop(context);
+                    },
+                    child: IgnorePointer(
+                      ignoring: false,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+
+                        ],
+                      ),
+                    ),
+                  )
+                ]))),
+      );
+
   }
+
+
+
+
+
+
 }
