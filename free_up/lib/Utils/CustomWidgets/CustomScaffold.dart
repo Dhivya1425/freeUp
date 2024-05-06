@@ -10,6 +10,9 @@ class CustomScaffold extends StatelessWidget {
   final Widget? body;
   final Key? scaffoldKey;
   final AppBar? appBar;
+  final bool? resizeToAvoidBottomInset;
+  final FloatingActionButtonLocation? floatingActionButtonLocation;
+  final Widget? floatingActionButton;
 
   CustomScaffold(
       {Key? key,
@@ -19,13 +22,15 @@ class CustomScaffold extends StatelessWidget {
       this.bottomNavigationBar,
       this.drawer,
       this.appBar,
-      this.body})
+      this.body,this.resizeToAvoidBottomInset,this.floatingActionButtonLocation,this.floatingActionButton})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+      floatingActionButtonLocation: floatingActionButtonLocation,
+      floatingActionButton:floatingActionButton,
       key: scaffoldKey,
       bottomNavigationBar: bottomNavigationBar,
       drawer: drawer,
